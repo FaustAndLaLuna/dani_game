@@ -275,7 +275,7 @@ def wabot():
         msg = resp.message()
         msg.body(Body)
     
-    print(str(resp))
+
     return str(resp)
 
 
