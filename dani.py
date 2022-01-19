@@ -180,7 +180,10 @@ def wabot():
 # curr_mental = 9
 # max_hp = 9
 # max_mental = 9
-
+    if curr_hp > max_hp:
+        curr_hp == max_hp
+    if curr_mental > max_mental:
+        curr_mental == max_mental
     content = request.values.get('Body', '').lower()
 
     if 'trampa' in content.lower():
@@ -203,6 +206,7 @@ def wabot():
             if str(i+1) in content:
                 curr_hp += min_events[curr_event]['effects'][i][0]
                 curr_mental += min_events[curr_event]['effects'][i][1]
+                print(f'Elegiste {min_events[curr_event]["opts"][i]}')
                 if curr_hp > max_hp:
                     curr_hp == max_hp
                 if curr_mental > max_mental:
@@ -243,6 +247,10 @@ def wabot():
         curr_event = -1
         resp = MessagingResponse()
         msg = resp.message()
+        if curr_hp > max_hp:
+            curr_hp == max_hp
+        if curr_mental > max_mental:
+            curr_mental == max_mental
         msg.body(f"Es {maj_events[curr_month]['month']}.\n"+maj_events[curr_month]['events'][curr_maj]['desc']+"\n"+f"Tienes {curr_hp}/{max_hp} de vida y {curr_mental}/{max_mental} de salud mental. Manda CONTINUAR para seguir jugando!")
     
     else:
@@ -258,6 +266,10 @@ def wabot():
         for opt in min_events[curr_event]['opts']:
             Body += f"Manda {i} si quieres {opt}.\n"
             i += 1
+        if curr_hp > max_hp:
+            curr_hp == max_hp
+        if curr_mental > max_mental:
+            curr_mental == max_mental
         Body += f"Tienes {curr_hp}/{max_hp} de vida y {curr_mental}/{max_mental} de salud mental."
         resp = MessagingResponse()
         msg = resp.message()
