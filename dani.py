@@ -259,7 +259,7 @@ def wabot():
             Body += f"Manda {i} si quieres {opt}.\n"
             i += 1
         Body += f"Tienes {curr_hp}/{max_hp} de vida y {curr_mental}/{max_mental} de salud mental."
-        resp = MessagingResponse(Body)
+        resp = MessagingResponse()
         msg = resp.message()
         msg.body(Body)
     
