@@ -173,6 +173,8 @@ def wabot():
     global maj_events
     global min_events
 
+    str_effects = ''
+
 # curr_min = -1
 # curr_maj = 0
 # curr_month = -1
@@ -212,6 +214,31 @@ def wabot():
     if curr_event != -1:
         for i in range(0,len(min_events[curr_event]['effects'])):
             if str(i+1) in content:
+                if min_events[curr_event]['effects'][i][0] != 0:
+                    if min_events[curr_event]['effects'][i][0] > 0:
+                        hp = min_events[curr_event]['effects'][i][0]
+                        hp_str = f'_Ganaste {hp} vida!_\n'
+                    else:
+                        hp = min_events[curr_event]['effects'][i][0]
+                        hp_str = f'_Perdiste {hp} vida!_\n'
+                else:
+                    hp_str = None
+                if min_events[curr_event]['effects'][i][1] != 0:
+                    if min_events[curr_event]['effects'][i][1] > 0:
+                        hp = min_events[curr_event]['effects'][i][1]
+                        mp_str = f'_Ganaste {hp} salud mental!_\n\n'
+                    else:
+                        hp = min_events[curr_event]['effects'][i][1]
+                        mp_str = f'_Perdiste {hp} salud mental!_\n\n'
+                else:
+                    mp_str = None
+                if hp_str:
+                    str_effects = hp_str
+                if mp_str:
+                    str_effects += mp_str
+                else:
+                    if hp_str:
+                        str_effects += '\n'
                 curr_hp += min_events[curr_event]['effects'][i][0]
                 curr_mental += min_events[curr_event]['effects'][i][1]
                 print(f'Elegiste {min_events[curr_event]["opts"][i]}')
@@ -259,7 +286,7 @@ def wabot():
             curr_hp = max_hp
         if curr_mental > max_mental:
             curr_mental = max_mental
-        msg.body(f"Es {maj_events[curr_month]['month']}.\n"+maj_events[curr_month]['events'][curr_maj]['desc']+"\n"+f"Tienes {curr_hp}/{max_hp} de vida y {curr_mental}/{max_mental} de salud mental. Manda CONTINUAR para seguir jugando!")
+        msg.body(str_effects + f"Es {maj_events[curr_month]['month']}.\n\n*"+maj_events[curr_month]['events'][curr_maj]['desc']+"*\n"+f"Tienes {curr_hp}/{max_hp} de vida y {curr_mental}/{max_mental} de salud mental.\n Manda CONTINUAR para seguir jugando!")
     
     else:
         if curr_min + 1 == maj_events[curr_month]['events'][curr_maj]['num_min']:
@@ -268,7 +295,8 @@ def wabot():
         else:
             curr_min += 1
         curr_event = random.randrange(0,len(min_events))
-        Body = f"Es {maj_events[curr_month]['month']}.\n"
+        Body = str_effects
+        Body = f"Es {maj_events[curr_month]['month']}.\n\n"
         Body += min_events[curr_event]['desc']+"\n"
         i = 1
         for opt in min_events[curr_event]['opts']:
