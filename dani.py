@@ -296,11 +296,11 @@ def wabot():
             curr_min += 1
         curr_event = random.randrange(0,len(min_events))
         Body = str_effects
-        Body = f"Es {maj_events[curr_month]['month']}.\n\n"
-        Body += min_events[curr_event]['desc']+"\n"
+        Body = f"Es {maj_events[curr_month]['month']}.\n\n*"
+        Body += min_events[curr_event]['desc']+"*\n"
         i = 1
         for opt in min_events[curr_event]['opts']:
-            Body += f"Manda {i} si quieres {opt}.\n"
+            Body += f"Manda {i} si quieres *{opt}*\n"
             i += 1
         if curr_hp > max_hp:
             curr_hp = max_hp
