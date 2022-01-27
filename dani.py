@@ -222,7 +222,7 @@ def wabot():
                 
     
     if curr_min == -1:
-        if curr_maj >= len(maj_events[curr_month]['events']) - 1:
+        if curr_maj >= len(maj_events[curr_month]['events']):
             curr_month += 1
             if curr_month == len(maj_events):
                         resp = MessagingResponse()
